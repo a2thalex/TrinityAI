@@ -18,6 +18,23 @@
 | **Jaeger** (Tracing) | jaeger | ✅ Running | 16686 | http://localhost:16686 |
 | **MinIO** (Object Storage) | minio | ✅ Running | 9000, 9001 | http://localhost:9001 |
 
+### 🤖 Application Services
+
+| Service | Container Name | Status | Port | Access URL |
+|---------|---------------|---------|------|------------|
+| **AI Codegen** (Code Generation) | ai-codegen-service | ⚡ Implemented | 8005 | http://localhost:8005 |
+| **Social Graph API** (Python/FastAPI) | social-graph-service | ⚡ Implemented | 8001 | http://localhost:8001 |
+| **Knowledge Graph API** (Java/Spring) | knowledge-graph-service | 🚧 In Progress | 8002 | http://localhost:8002 |
+| **AI Graph API** (Python/FastAPI) | ai-graph-service | ⏳ Pending | 8003 | http://localhost:8003 |
+| **Fusion Engine** | fusion-engine-service | ⏳ Pending | 8004 | http://localhost:8004 |
+| **GraphQL Gateway** | api-gateway | ⚡ Schema Only | 4000 | http://localhost:4000 |
+
+**Status Legend**:
+- ✅ Running - Deployed and operational
+- ⚡ Implemented - Code complete, not deployed
+- 🚧 In Progress - Partially implemented
+- ⏳ Pending - Not started
+
 ## 🌐 Quick Access Links
 
 ### Primary Services
