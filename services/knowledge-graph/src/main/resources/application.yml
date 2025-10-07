@@ -1,0 +1,132 @@
+spring:
+  application:
+    name: knowledge-graph-service
+
+  # Jackson configuration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+  # Cache configuration (Redis)
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000 # 10 minutes
+      cache-null-values: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 1
+      timeout: 2000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+server:
+  port: 8002
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+
+# Jena Fuseki Configuration
+jena:
+  fuseki:
+    url: ${FUSEKI_URL:http://localhost:3030}
+    dataset: ${FUSEKI_DATASET:knowledge}
+    username: ${FUSEKI_USERNAME:admin}
+    password: ${FUSEKI_PASSWORD:admin}
+  reasoning:
+    enabled: ${REASONING_ENABLED:true}
+    type: ${REASONING_TYPE:OWL}
+  base-ontologies:
+    - http://www.w3.org/2000/01/rdf-schema#
+    - http://www.w3.org/2002/07/owl#
+    - http://purl.org/dc/elements/1.1/
+    - http://xmlns.com/foaf/0.1/
+
+# Management and monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    redis:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+    operations-sorter: method
+    tags-sorter: alpha
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.trinityai: DEBUG
+    org.apache.jena: INFO
+    org.springframework.cache: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+  file:
+    name: logs/knowledge-graph.log
+
+# Async configuration
+async:
+  core-pool-size: 5
+  max-pool-size: 10
+  queue-capacity: 100
+  thread-name-prefix: knowledge-graph-async-
+
+# CORS configuration
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:4000}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  exposed-headers: X-Total-Count,X-Page-Number,X-Page-Size
+  allow-credentials: true
+  max-age: 3600
+
+# Custom application properties
+app:
+  knowledge-graph:
+    max-query-results: 1000
+    default-page-size: 100
+    max-page-size: 500
+    query-timeout: 30 # seconds
+    enable-caching: true
+    cache-ttl: 600 # seconds
+    max-inference-iterations: 100
+    enable-auto-reasoning: false
+    validation:
+      strict-mode: false
+      max-errors: 100
+    import:
+      batch-size: 1000
+      max-file-size: 104857600 # 100MB
+    export:
+      default-format: TURTLE
+      include-inferences: false

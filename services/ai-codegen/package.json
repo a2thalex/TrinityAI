@@ -1,0 +1,73 @@
+{
+  "name": "@trinityai/ai-codegen-service",
+  "version": "1.0.0",
+  "description": "AI Code Generation Service using Claude Code SDK for TrinityAI",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write 'src/**/*.{ts,json}'",
+    "docker:build": "docker build -t ai-codegen-service .",
+    "docker:run": "docker run -p 8005:8005 ai-codegen-service"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.17.0",
+    "@claude-ai/code-sdk": "^1.0.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4",
+    "winston": "^3.11.0",
+    "bull": "^4.11.5",
+    "ioredis": "^5.3.2",
+    "openai": "^4.20.1",
+    "langchain": "^0.0.201",
+    "@langchain/community": "^0.0.14",
+    "@octokit/rest": "^20.0.2",
+    "simple-git": "^3.20.0",
+    "archiver": "^6.0.1",
+    "handlebars": "^4.7.8",
+    "js-yaml": "^4.1.0",
+    "glob": "^10.3.10",
+    "fs-extra": "^11.2.0",
+    "uuid": "^9.0.1",
+    "prom-client": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/archiver": "^6.0.2",
+    "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/uuid": "^9.0.7",
+    "@types/bull": "^4.10.0",
+    "typescript": "^5.3.3",
+    "tsx": "^4.6.2",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "@types/jest": "^29.5.11"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "code-generation",
+    "claude",
+    "trinity",
+    "webapp",
+    "automation"
+  ],
+  "author": "TrinityAI",
+  "license": "MIT"
+}
