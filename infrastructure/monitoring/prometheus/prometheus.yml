@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'social-graph'
+    static_configs:
+      - targets: ['social-graph-neo4j:8001']
+    metrics_path: '/metrics'
+
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:4000']
+    metrics_path: '/metrics'
+
+  - job_name: 'neo4j'
+    static_configs:
+      - targets: ['social-graph-neo4j:2004']
+    metrics_path: '/metrics'
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-cache:6379']
+
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['kafka:9308']
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['metadata-db:5432']
